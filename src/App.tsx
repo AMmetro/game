@@ -40,8 +40,7 @@ function App() {
             beep.play()
            }
 
-                                                      // let result:any
-                                                      // let title:any
+
           let checkWinner=(cellData:any)=>{
           for (let i=0; i<8; i++) {
               if ( cellData[combination[i][0]]===cellData[combination[i][1]] &&
@@ -50,9 +49,6 @@ function App() {
                   )
               {alert(cellData[combination[i][1]] + " win")
                window.location.reload() }
-              //      result = confirm("question")
-              //   result = prompt(title,"you")
-
              }
 
     }
@@ -133,7 +129,7 @@ function App() {
                     <label htmlFor="toc">Играть ноликами</label>
                 </div>
                 <div id={"testarea"} className="game_box_container">
-                    {cellArea}
+                     {cellArea}
                 </div>
                 <div className="footer">
                     <a href={"https://rs.school/js/"}>
