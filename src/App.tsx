@@ -1,5 +1,6 @@
 import React, {Component, createRef, useState} from 'react';
 import './App.css';
+
 //@ts-ignore
 import  sound from "./assets/sound/mus.mp3"
 
@@ -40,8 +41,7 @@ function App() {
             beep.play()
            }
 
-                                                      // let result:any
-                                                      // let title:any
+
           let checkWinner=(cellData:any)=>{
           for (let i=0; i<8; i++) {
               if ( cellData[combination[i][0]]===cellData[combination[i][1]] &&
@@ -50,9 +50,6 @@ function App() {
                   )
               {alert(cellData[combination[i][1]] + " win")
                window.location.reload() }
-              //      result = confirm("question")
-              //   result = prompt(title,"you")
-
              }
 
     }
@@ -108,7 +105,7 @@ function App() {
 
     return (
         <div className="App">
-
+            {/*insert audio*/}
             <audio id='sound' src={sound} />
 
               <div className="main_container">
@@ -133,7 +130,7 @@ function App() {
                     <label htmlFor="toc">Играть ноликами</label>
                 </div>
                 <div id={"testarea"} className="game_box_container">
-                    {cellArea}
+                     {cellArea}
                 </div>
                 <div className="footer">
                     <a href={"https://rs.school/js/"}>
@@ -143,8 +140,6 @@ function App() {
                     <span className={"git_link"}>Github.com/AMmetro</span>
                     </a>
                     <img src={"https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"} style={ {width: "20px"}} />
-
-
                 </div>
             </div>
         </div>
