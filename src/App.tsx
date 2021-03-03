@@ -9,6 +9,8 @@ function App() {
     const [turn, setTurn] = useState (0);
     const [inteleg, setInteleg] = useState (false);
     const [count, setCount] = useState (0);
+    const [finish, setFinish] = useState (false);
+
 
     const combination:Array<any>=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
@@ -47,28 +49,58 @@ function App() {
                    cellData[combination[i][1]]===cellData[combination[i][2]] &&
                    cellData[combination[i][1]]!= null
                   )
-              {alert(cellData[combination[i][1]] + " win")
-               window.location.reload() }
+              {
+                  setFinish(true)
+                  setTimeout(()=>{alert(cellData[combination[i][1]] + " win")},100)
+               }
              }
 
     }
 
-          if (inteleg){
+           // if third computer stroke
+          if (inteleg && !finish){
+              for (let y=0; y<8; y++) {
+                  if (( cellData[combination[y][0]] === mark &&
+                          cellData[combination[y][1]]=== mark &&
+                          cellData[combination[y][2]] === null)
+                      || (cellData[combination[y][0]] === mark &&
+                          cellData[combination[y][1]]=== null &&
+                          cellData[combination[y][2]] === mark)
+                      ||
+                          (cellData[combination[y][0]] === null &&
+                          cellData[combination[y][1]]=== mark &&
+                          cellData[combination[y][2]] === mark)
+                      )
+                  {
 
-             let i=1
-             while (i<999) {
-                        let randomTurn=Math.floor(Math.random()*8)
-                            if (cellData[randomTurn]==null){
-                                let newCellData=[...cellData]
-                                    newCellData[randomTurn]=mark
-                                    setInteleg(!inteleg)
-                                    setCellData(newCellData)
-                                    setTurn(turn+1)
-                                    i=999
-                            }
-                        i++
+                      let copyCellData=[...cellData]
+                          copyCellData[combination[y][0]]=mark
+                          copyCellData[combination[y][1]]=mark
+                          copyCellData[combination[y][2]]=mark
+                          setFinish(true)
+                      checkWinner(copyCellData)
+              }
+                  }
+             }
+
+             // if first or second computer stroke
+            if (inteleg && !finish) {
+                console.log("finish= " + finish)
+                let i = 1
+                while (i < 999) {
+                    let randomTurn = Math.floor(Math.random() * 8)
+                    if (cellData[randomTurn] == null) {
+                        let newCellData = [...cellData]
+                        newCellData[randomTurn] = mark
+                        setInteleg(!inteleg)
+                        setCellData(newCellData)
+                        setTurn(turn + 1)
+                        i = 999
                     }
-          }
+                    i++
+                }
+            }
+
 
 
 
@@ -104,7 +136,7 @@ function App() {
 
     return (
         <div className="App">
-
+            {/*insert audio*/}
             <audio id='sound' src={sound} />
 
               <div className="main_container">
@@ -139,8 +171,6 @@ function App() {
                     <span className={"git_link"}>Github.com/AMmetro</span>
                     </a>
                     <img src={"https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"} style={ {width: "20px"}} />
-
-
                 </div>
             </div>
         </div>
